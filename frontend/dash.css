@@ -1,0 +1,13 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(#fdfdfd, #b6d5f0);
+    font-family: 'outfit', sans-serif;
+}
+
+h1 {
+    font-size: 3rem;
+    font-family: 'faculty glyphic', sans-serif;
+}
