@@ -16,9 +16,11 @@ linkToRegister.addEventListener("click", () => {
   formTitle.textContent = "Sign Up";
 });
 
+
 // registration form submission
 register.addEventListener("submit", (e) => {
   e.preventDefault();
+
   const username = document.getElementById("register-username").value;
   const email = document.getElementById("register-email").value;
   const password = document.getElementById("register-password").value;
@@ -30,20 +32,24 @@ register.addEventListener("submit", (e) => {
     password,
   };
 
-  fetch("http://localhost:3000/api/register", {
+  fetch("http://localhost:3000/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userData),
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+      if (data.success) {
+        alert("Registration successful! Please log in.");
+        linkToLogin.click(); // Redirect to login form after successful registration
+      } else {
+        alert("Registration failed: " + data.message);
+      }
     })
     .catch((err) => {
       console.error("Error:", err);
     });
 
-  localStorage.setItem("user", JSON.stringify(userData));
 });
 
 //login form submission
@@ -53,11 +59,20 @@ login.addEventListener("submit", (e) => {
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
 
-  fetch("http://localhost:3000/api/user", {
+  fetch("http://localhost:3000/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   })
     .then((res) => res.json())
-    .then((data) => console.log(data.message, data));
+    .then((data) => {
+      if (data.success) {
+          window.location.href = "dashboard.html"; // Redirect to dashboard on successful login
+      } else {
+        alert("Login failed: " + data.message);
+      }
+    }) 
+    .catch((err) => {
+      console.error("Error:", err);
+    })
 });

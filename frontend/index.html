@@ -20,10 +20,11 @@
         <!-- sign up form  -->
         <form id="register-form" class="left-container register">
           <input
-            type="username"
+            type="text"
             id="register-username"
             name="username"
             placeholder="user name"
+            autocomplete="given-name"
             required
           />
           <input
@@ -31,6 +32,7 @@
             id="register-email"
             name="email"
             placeholder="example@gmail.com"
+            autocomplete="off"
             required
           />
           <input
@@ -38,6 +40,7 @@
             id="register-password"
             name="password"
             placeholder="password@123"
+            autocomplete="off"
             required
           />
 
@@ -55,6 +58,7 @@
             id="login-email"
             name="email"
             placeholder="example@gmail.com"
+            autocomplete="@gmail.com"
             required
           />
           <input
@@ -62,6 +66,7 @@
             id="login-password"
             name="password"
             placeholder="password@123"
+            autocomplete="off"
             required
           />
 
