@@ -41,6 +41,33 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
     // login user logic will be here
+    try {
+        const { email, password } = req.body;
+
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
+            if (isPasswordCorrect) {
+                return res.status(200).json({
+                    success: true,
+                    message: "User logged in successfully",
+                    user: existingUser
+                });
+            } else {
+                return res.status(401).json({
+                    success: false,
+                    message: "Invalid password"
+                });
+            }
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "User not found with this email"
+            });
+        }
+    } catch (error) {
+        
+    }
 }
 
 // getting all the users from the database
