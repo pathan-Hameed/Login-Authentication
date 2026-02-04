@@ -1,0 +1,1 @@
+// built the user schema and model and also automatically create collections in mongodb
