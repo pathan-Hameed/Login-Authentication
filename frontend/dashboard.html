@@ -1,12 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="dash.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-</head>
-<body>
-    <h1>Wellcome!! Login Successfull</h1>
-</body>
+    <link rel="stylesheet" href="dash.css" />
+    <script src="dash.js" defer></script>
+  </head>
+  <body>
+    <div class="dashboard">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="logo">MyApp</div>
+        <ul class="nav-links">
+          <li class="active">Home</li>
+          <li>Profile</li>
+          <li>Settings</li>
+          <li>Reports</li>
+          <li id="logoutBtn">Logout</li>
+        </ul>
+      </aside>
+
+      <!-- Mobile Menu Button -->
+      <div class="mobile-menu-btn" id="mobileMenuBtn">
+        &#9776;
+        <!-- hamburger icon -->
+      </div>
+
+      <!-- Main content -->
+      <main class="main-content">
+        <header class="topbar">
+          <h1>Welcome, <span id="usernameDisplay">User</span>!</h1>
+        </header>
+
+        <section class="cards">
+          <div class="card">
+            <h3>Total Users</h3>
+            <p id="totalUsers">0</p>
+          </div>
+          <div class="card">
+            <h3>Active Sessions</h3>
+            <p id="activeSessions">0</p>
+          </div>
+          <div class="card">
+            <h3>New Messages</h3>
+            <p id="newMessages">0</p>
+          </div>
+          <div class="card">
+            <h3>Notifications</h3>
+            <p id="notifications">0</p>
+          </div>
+        </section>
+
+        <section class="welcome">
+          <p>
+            This is your modern dashboard. You can add charts, tables, and more
+            content here.
+          </p>
+        </section>
+      </main>
+    </div>
+  </body>
 </html>

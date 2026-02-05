@@ -16,7 +16,6 @@ linkToRegister.addEventListener("click", () => {
   formTitle.textContent = "Sign Up";
 });
 
-
 // registration form submission
 register.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -41,6 +40,7 @@ register.addEventListener("submit", (e) => {
     .then((data) => {
       if (data.success) {
         alert("Registration successful! Please log in.");
+        register.reset(); // Clear the registration form after submission
         linkToLogin.click(); // Redirect to login form after successful registration
       } else {
         alert("Registration failed: " + data.message);
@@ -49,7 +49,6 @@ register.addEventListener("submit", (e) => {
     .catch((err) => {
       console.error("Error:", err);
     });
-
 });
 
 //login form submission
@@ -67,12 +66,14 @@ login.addEventListener("submit", (e) => {
     .then((res) => res.json())
     .then((data) => {
       if (data.success) {
-          window.location.href = "dashboard.html"; // Redirect to dashboard on successful login
+        alert("Login successful! Welcome " + data.user.username);
+        login.reset(); // Clear the login form after successful login
+        window.location.href = "dashboard.html"; // Redirect to dashboard on successful login
       } else {
         alert("Login failed: " + data.message);
       }
-    }) 
+    })
     .catch((err) => {
       console.error("Error:", err);
-    })
+    });
 });

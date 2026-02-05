@@ -1,13 +1,148 @@
-body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(#fdfdfd, #b6d5f0);
-    font-family: 'outfit', sans-serif;
+/* Reset and base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-h1 {
-    font-size: 3rem;
-    font-family: 'faculty glyphic', sans-serif;
+body {
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background-color: #1e293b;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.sidebar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.sidebar .nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sidebar .nav-links li {
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.sidebar .nav-links li:hover,
+.sidebar .nav-links li.active {
+    background-color: #334155;
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* Topbar */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+/* Cards section */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #64748b;
+}
+
+.card p {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Welcome section */
+.welcome {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    color: #475569;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+    display: none; /* hidden on desktop */
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    font-size: 2rem;
+    color: #1e293b;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Mobile sidebar */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: -250px; /* hidden by default */
+        top: 0;
+        height: 100%;
+        width: 250px;
+        background-color: #1e293b;
+        padding: 1rem;
+        transition: left 0.3s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.active {
+        left: 0; /* slide in */
+    }
+
+    .mobile-menu-btn {
+        display: block; /* show button on mobile */
+    }
+
+    .main-content {
+        padding: 1rem; /* adjust padding for small screens */
+        margin-top: 4rem;
+    }
 }
