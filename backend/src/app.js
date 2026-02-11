@@ -9,7 +9,6 @@ app.use(express.json());
 
 // routes will be used here
 app.use('/auth', router);
-app.use('/api', router);
 
 
 export default app;
