@@ -1,22 +1,31 @@
 // Sample JS for dashboard dynamic content
+const totalUser = document.getElementById("totalUsers");
+const logoutBtn = document.getElementById("logoutBtn");
 
-// Display username after login (you can store it in localStorage after login)
-const usernameDisplay = document.getElementById('usernameDisplay');
-const storedUser = localStorage.getItem('username') || "User";
-usernameDisplay.textContent = storedUser;
 
-// Sample dynamic numbers
-document.getElementById('totalUsers').textContent = 125;
-document.getElementById('activeSessions').textContent = 8;
-document.getElementById('newMessages').textContent = 5;
-document.getElementById('notifications').textContent = 3;
+const authGetAllUser = async (req, res) => {
+    const token = localStorage.getItem('token');
+    
+    res = await fetch('http://localhost:3000/auth/allUsers', {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
 
-// Logout button functionality
-document.getElementById('logoutBtn').addEventListener('click', () => {
-    localStorage.removeItem('username'); // clear login
-    alert('You have been logged out.');
-    window.location.href = 'index.html'; // redirect to login page
-});
+    const data = await res.json();
+    totalUser.innerText = data.users.length;
+}
+
+authGetAllUser()
+
+// LOGOUT 
+logoutBtn.addEventListener("click", () => {
+    const token = localStorage.getItem('token');
+    localStorage.removeItem("token");  
+    window.location.href = "index.html";  
+})
+
 
 
 // Mobile menu toggle

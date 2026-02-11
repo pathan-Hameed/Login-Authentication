@@ -3,17 +3,19 @@ const login = document.getElementById("login-form");
 const linkToRegister = document.getElementById("register-link");
 const linkToLogin = document.getElementById("login-link");
 const formTitle = document.getElementById("form-title");
+const loginTitle = document.getElementById("login-title");
+const registerTitle = document.getElementById("register-title");
 
 linkToLogin.addEventListener("click", () => {
   register.style.display = "none";
   login.style.display = "flex";
-  formTitle.textContent = "Login";
+  formTitle.innerText = "Login";
 });
 
 linkToRegister.addEventListener("click", () => {
   login.style.display = "none";
   register.style.display = "flex";
-  formTitle.textContent = "Sign Up";
+  formTitle.innerText = "Sign Up";
 });
 
 // registration form submission
@@ -52,28 +54,24 @@ register.addEventListener("submit", (e) => {
 });
 
 //login form submission
-login.addEventListener("submit", (e) => {
+login.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
 
-  fetch("http://localhost:3000/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.success) {
-        alert("Login successful! Welcome " + data.user.username);
-        login.reset(); // Clear the login form after successful login
-        window.location.href = "dashboard.html"; // Redirect to dashboard on successful login
-      } else {
-        alert("Login failed: " + data.message);
-      }
-    })
-    .catch((err) => {
-      console.error("Error:", err);
+  try {
+    const res = await fetch("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
     });
+    const data = await res.json();
+    if (data.success) {
+      localStorage.setItem("token", data.token);
+      window.location.href = 'dashboard.html';     
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });
